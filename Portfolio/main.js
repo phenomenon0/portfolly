@@ -2,7 +2,8 @@ import './style.css'
 
 import * as THREE from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'; 
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader'
+
 
 
 const scene =  new THREE.Scene( );
@@ -10,6 +11,7 @@ const camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHei
 const renderer = new THREE.WebGL1Renderer({
   canvas: document.querySelector('#bg'),
 });
+
 
 
 renderer.setPixelRatio(window.devicePixelRatio);
@@ -62,7 +64,7 @@ const femi2 = new THREE.Mesh(
   new THREE.BoxGeometry(3,3,3),
   new THREE.MeshBasicMaterial({map:femiTexture2})
 )
-
+femi2.position.set(12,12,12)
 scene.add(femi2)
 
 const femiTexture = new THREE.TextureLoader().load('femibx.jpg');
@@ -84,7 +86,36 @@ moon.position.z = 30;
 moon.position.x =-10;
 scene.add(moon)
 
- 
+// Load a glTF resource
+const loader = new GLTFLoader();
+loader.load(
+	// resource URL
+	'RiggedFigure.gltf',
+	// called when the resource is loaded
+	function ( gltf ) {
+
+		scene.add( gltf.scene );
+
+		gltf.animations; // Array<THREE.AnimationClip>
+		gltf.scene; // THREE.Group
+		gltf.scenes; // Array<THREE.Group>
+		gltf.cameras; // Array<THREE.Camera>
+		gltf.asset; // Object
+
+	},
+	// called while loading is progressing
+	function ( xhr ) {
+
+		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+
+	},
+	// called when loading has errors
+	function ( error ) {
+
+		console.log( 'An error happened' );
+
+	}
+);
 
 const marsTexture = new THREE.TextureLoader().load('mars.jpg')
 const marsNormal = new THREE.TextureLoader().load('mars_normal.jpg')
