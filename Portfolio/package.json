@@ -11,6 +11,6 @@
   },
   "dependencies": {
     "three": "^0.129.0",
-   
+    "three.terrain.js": "^1.6.0"
   }
 }

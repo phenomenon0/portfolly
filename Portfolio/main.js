@@ -2,7 +2,9 @@ import './style.css'
 
 import * as THREE from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'; 
-import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader'
+import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader';
+
+
 
 
 
@@ -11,7 +13,6 @@ const camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHei
 const renderer = new THREE.WebGL1Renderer({
   canvas: document.querySelector('#bg'),
 });
-
 
 
 renderer.setPixelRatio(window.devicePixelRatio);
@@ -64,7 +65,7 @@ const femi2 = new THREE.Mesh(
   new THREE.BoxGeometry(3,3,3),
   new THREE.MeshBasicMaterial({map:femiTexture2})
 )
-femi2.position.set(12,12,12)
+femi2.position.set(0,0,0)
 scene.add(femi2)
 
 const femiTexture = new THREE.TextureLoader().load('femibx.jpg');
@@ -86,37 +87,50 @@ moon.position.z = 30;
 moon.position.x =-10;
 scene.add(moon)
 
-// Load a glTF resource
-const loader = new GLTFLoader();
-loader.load(
-	// resource URL
-	'RiggedFigure.gltf',
-	// called when the resource is loaded
-	function ( gltf ) {
 
-		scene.add( gltf.scene );
 
-		gltf.animations; // Array<THREE.AnimationClip>
-		gltf.scene; // THREE.Group
-		gltf.scenes; // Array<THREE.Group>
-		gltf.cameras; // Array<THREE.Camera>
-		gltf.asset; // Object
 
-	},
-	// called while loading is progressing
-	function ( xhr ) {
 
-		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
 
-	},
-	// called when loading has errors
-	function ( error ) {
 
-		console.log( 'An error happened' );
+// function loadingThings(source,x,y,z,scale,){
+//   // Load a glTF resource
+//   const loader = new GLTFLoader();
+//   loader.load(
+//     // resource URL
+//     source,
+//     // called when the resource is loaded
+//     function ( gltf ) {
+//       var toy = gltf.scene;
+//       toy.scale.set(scale,scale,scale);
+//       toy.position.set(x,y,z);
+//       scene.add( toy );
 
-	}
-);
+//       gltf.animations; // Array<THREE.AnimationClip>
+//       gltf.scene; // THREE.Group
+//       gltf.scenes; // Array<THREE.Group>
+//       gltf.cameras; // Array<THREE.Camera>
+//       gltf.asset; // Object
 
+//     },
+//     // called while loading is progressing
+//     function ( xhr ) {
+
+//       console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+
+//     },
+//     // called when loading has errors
+//     function ( error ) {
+
+//       console.log( 'An error happened' );
+
+//     }
+//   );
+//   return {
+
+//   }
+// }
+// loadingThings('./scene.gltf',2,2,2,0.01);
 const marsTexture = new THREE.TextureLoader().load('mars.jpg')
 const marsNormal = new THREE.TextureLoader().load('mars_normal.jpg')
 const mars = new THREE.Mesh(
@@ -140,7 +154,7 @@ function moveCamera(){
   femi.rotation.y += 0.051;
 
 
-  scene.rotation.y += 0.051;
+  scene.rotation.y += 0.01251;
   scene.rotation.x +=0.00031;
 
   femi2.rotation.y += -0.051;
@@ -161,7 +175,7 @@ function animate(){
   requestAnimationFrame(animate);
   renderer.render(scene, camera);
 
-  torus.rotation.x += 0.01;
+  torus.rotation.x += 0.0031;
   torus.rotation.y += 0.002;
   mars.rotation.y += 0.0051
   
