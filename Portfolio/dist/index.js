@@ -5,13 +5,6 @@ import {OrbitControls} from 'https://unpkg.com/three@0.127.0/examples/jsm/contro
 
 //import {GLTFLoader} from 'https://unpkg.com/three@0.127.0/examples/jsm/loaders/GLTFLoader';
 
-import 'femi2';
-import 'femibx';
-import 'normal.jpg';
-import 'mars.jpg';
-import 'moon.jpg';
-import 'mars_topo.jpg';
-import 'space.jpg';
 
 
 
@@ -34,6 +27,7 @@ renderer.render(scene, camera);
 const geometry = new THREE.TorusGeometry(20,6,20,40, Math.PI*1.8) 
 const material = new THREE.MeshStandardMaterial({color:0xffffff, wireframe:true});
 const torus = new THREE.Mesh(geometry, material);
+torus.rotation.Z(180);
 
 scene.add(torus)
 
