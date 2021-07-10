@@ -27,7 +27,6 @@ renderer.render(scene, camera);
 const geometry = new THREE.TorusGeometry(20,6,20,40, Math.PI*1.8) 
 const material = new THREE.MeshStandardMaterial({color:0xffffff, wireframe:true});
 const torus = new THREE.Mesh(geometry, material);
-torus.rotation.Z(180);
 
 scene.add(torus)
 
@@ -42,9 +41,9 @@ scene.add(pointLight)
 const ambientLight = new THREE.AmbientLight(0xfffffd)
 scene.add(ambientLight)
 
-const lightHelper = new THREE.PointLightHelper(pointLight)
-const gridHelper= new THREE.GridHelper(200,50);
-scene.add(lightHelper,gridHelper)
+// const lightHelper = new THREE.PointLightHelper(pointLight)
+// const gridHelper= new THREE.GridHelper(200,50);
+// scene.add(lightHelper,gridHelper)
 
 const controls = new OrbitControls(camera, renderer.domElement)
 

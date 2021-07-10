@@ -6,9 +6,7 @@
     <link href="https://fonts.googleapis.com/css?family=Dosis|Titillium+Web" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Phenomenon One: Ominous Works</title>
-  <script type="module" crossorigin src="index.js"></script>
-  <link rel="stylesheet" href="style.css">
-</head>
+  </head>
   <body>
     <canvas id="bg"></canvas> 
     <main>
@@ -18,20 +16,18 @@
         </p>
         
       </header>
-      <blockquote>
-        <h3>Imagination is more important that knowledge. Knowledge is limited. Imagination encircles the world. – Albert Einstein, 1931</h3>
+      <blockquote><p>Imagination is more important that knowledge. Knowledge is limited. Imagination encircles the world. – Albert Einstein, 1931</p>
+        
         
       </blockquote>
       <section class= 'centre'>
        
-          <p  class ="white">
+          <h3  class ="">
             
-                 Born in Ilorin Nigeria, A place that was slow enough you get a lot of time to think,
-              and I did just that. When I wasnt daydreaming I read and when I wasn't reading I dreamt. I always loved computers
-              it always felt like the best thing ever invented, you could do anything with it !. Twenty years after having these thoughts
-              I feel people still dont get just how much this "anything" is. And people who are already in the system learn limitations 
-              where.
-            </p>
+                 I love to work on projects that solve real problems or create new realities. Using my deep domain 
+                 Knowledge in fields such as  arts, music, cinematography and cross language programming to solve 
+                 complex or at least interesting problems. 
+          </h3>
             
          
           <p> Ominous words from the works -- Vol III</p>
@@ -54,15 +50,7 @@
         
          
       </section>
-      <section class = 'left'>
-        <h2>Projects to boot     
-        </h2>
-      <image src='./femi2.jpg'></image>
-        <p> the way he works is sure mysterious the way he coughs is sure delirious</p>
-        <p> the way he works is sure mysterious the way he coughs is sure delirious</p>
-        
-   
-      </section>
+     
        
       <section class ='left'>
         <h2>
@@ -72,7 +60,197 @@
       </section>
       
     </main>
-    
+    <script type="module" >
+
+      import * as THREE from 'https://unpkg.com/three@0.127.0/build/three.module.js'; 
+      import {OrbitControls} from 'https://unpkg.com/three@0.127.0/examples/jsm/controls/OrbitControls.js'
+      
+      //import {GLTFLoader} from 'https://unpkg.com/three@0.127.0/examples/jsm/loaders/GLTFLoader';
+      
+      
+      
+      
+      
+      const scene =  new THREE.Scene( );
+      const camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight,0.1,1000)
+      const renderer = new THREE.WebGL1Renderer({
+        canvas: document.querySelector('#bg'),
+      });
+      
+      
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      camera.position.setZ(10);
+      renderer.render(scene, camera);
+      //geometry defines shape of an object 
+      // torus parameters = 
+      //(radius of the torus, radius of tube, radialSegments, Tubular segments, arc Math.PI*2)
+      
+      const geometry = new THREE.TorusGeometry(20,6,20,40, Math.PI*1.8) 
+      const material = new THREE.MeshStandardMaterial({color:0xffffff, wireframe:true});
+      const torus = new THREE.Mesh(geometry, material);
+      
+      scene.add(torus)
+      
+      
+      
+      
+      
+      const pointLight =  new THREE.PointLight(0xcAaca)
+      pointLight.position.set(15,5,5)
+      scene.add(pointLight)
+      
+      const ambientLight = new THREE.AmbientLight(0xfffffd)
+      scene.add(ambientLight)
+      
+      // const lightHelper = new THREE.PointLightHelper(pointLight)
+      // const gridHelper= new THREE.GridHelper(200,50);
+      // scene.add(lightHelper,gridHelper)
+      
+      const controls = new OrbitControls(camera, renderer.domElement)
+      
+      function addStar() {
+        const geometry = new THREE.SphereGeometry(0.25,24,24);
+        const material = new THREE.MeshStandardMaterial({color:0xffffff})
+        const star = new THREE.Mesh(geometry, material);
+        const [x,y,z] = Array(3).fill().map(()=> THREE.MathUtils.randFloatSpread(300));
+        star.position.set(x,y,z);
+        scene.add(star)
+      }
+      
+      Array(500).fill().forEach(addStar)
+      
+      const spaceTexture = new THREE.TextureLoader().load('space.jpg')
+      scene.background = spaceTexture;
+      
+      const femiTexture2 = new THREE.TextureLoader().load('femi2.jpg');
+      const femi2 = new THREE.Mesh(
+        new THREE.BoxGeometry(3,3,3),
+        new THREE.MeshBasicMaterial({map:femiTexture2})
+      )
+      femi2.position.set(0,0,0)
+      scene.add(femi2)
+      
+      const femiTexture = new THREE.TextureLoader().load('femibx.jpg');
+      const femi = new THREE.Mesh(
+        new THREE.BoxGeometry(6,6,6),
+        new THREE.MeshStandardMaterial({map:femiTexture})
+      )
+      femi.position.set(0,0,9);
+      scene.add(femi)
+      
+      const moonTexture = new THREE.TextureLoader().load('moon.jpg')
+      const normalTexture = new THREE.TextureLoader().load('normal.jpg')
+      const moon = new THREE.Mesh(
+        new THREE.SphereGeometry(10,32,32),
+        new THREE.MeshStandardMaterial({map:moonTexture,
+        normalMap:normalTexture})
+      );
+      moon.position.z = 30;
+      moon.position.x =-10;
+      scene.add(moon)
+      
+      
+      
+      
+      
+      
+      
+      // function loadingThings(source,x,y,z,scale,){
+      //   // Load a glTF resource
+      //   const loader = new GLTFLoader();
+      //   loader.load(
+      //     // resource URL
+      //     source,
+      //     // called when the resource is loaded
+      //     function ( gltf ) {
+      //       var toy = gltf.scene;
+      //       toy.scale.set(scale,scale,scale);
+      //       toy.position.set(x,y,z);
+      //       scene.add( toy );
+      
+      //       gltf.animations; // Array<THREE.AnimationClip>
+      //       gltf.scene; // THREE.Group
+      //       gltf.scenes; // Array<THREE.Group>
+      //       gltf.cameras; // Array<THREE.Camera>
+      //       gltf.asset; // Object
+      
+      //     },
+      //     // called while loading is progressing
+      //     function ( xhr ) {
+      
+      //       console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+      
+      //     },
+      //     // called when loading has errors
+      //     function ( error ) {
+      
+      //       console.log( 'An error happened' );
+      
+      //     }
+      //   );
+      //   return {
+      
+      //   }
+      // }
+      // loadingThings('./scene.gltf',2,2,2,0.01);
+      const marsTexture = new THREE.TextureLoader().load('mars.jpg')
+      const marsNormal = new THREE.TextureLoader().load('mars_normal.jpg')
+      const mars = new THREE.Mesh(
+        new THREE.SphereGeometry(50,23,23),
+        new THREE.MeshStandardMaterial({map:marsTexture,normalMap:marsNormal})
+      );
+      mars.position.z =-200
+      mars.position.y= -32
+      mars.position.x= 32
+      
+      scene.add(mars)
+      
+       
+      
+      function moveCamera(){
+        const t =document.body.getBoundingClientRect().top;
+        moon.rotation.x += 0.05;
+        moon.rotation.y += 0.075;
+        
+      
+        femi.rotation.y += 0.051;
+      
+      
+        scene.rotation.y += 0.01251;
+        scene.rotation.x +=0.00031;
+      
+        femi2.rotation.y += -0.051;
+        
+      
+       
+      
+        
+        camera.position.z = t*-0.01191;
+        
+        // mars.rotation.x +=0.04
+        // mars.rotation.y +=0.014
+      
+      }
+      document.body.onscroll= moveCamera
+      
+      function animate(){
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+      
+        torus.rotation.x += 0.0031;
+        torus.rotation.y += 0.002;
+        mars.rotation.y += 0.0051
+        
+       
+        controls.update();
+        
+      
+        renderer.render(scene, camera );
+      }
+      
+      animate()
+      </script>
     
   </body>
 </html>

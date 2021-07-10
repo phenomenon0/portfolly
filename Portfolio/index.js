@@ -58,10 +58,10 @@ function addStar() {
 
 Array(500).fill().forEach(addStar)
 
-const spaceTexture = new THREE.TextureLoader().load('https://omens-basket.s3.eu-west-2.amazonaws.com/space.jpg')
+const spaceTexture = new THREE.TextureLoader().load('space.jpg')
 scene.background = spaceTexture;
 
-const femiTexture2 = new THREE.TextureLoader().load('https://omens-basket.s3.eu-west-2.amazonaws.com/femi2.jpg');
+const femiTexture2 = new THREE.TextureLoader().load('femi2.jpg');
 const femi2 = new THREE.Mesh(
   new THREE.BoxGeometry(3,3,3),
   new THREE.MeshBasicMaterial({map:femiTexture2})
@@ -69,7 +69,7 @@ const femi2 = new THREE.Mesh(
 femi2.position.set(0,0,0)
 scene.add(femi2)
 
-const femiTexture = new THREE.TextureLoader().load('https://omens-basket.s3.eu-west-2.amazonaws.com/femibx.jpg');
+const femiTexture = new THREE.TextureLoader().load('femibx.jpg');
 const femi = new THREE.Mesh(
   new THREE.BoxGeometry(6,6,6),
   new THREE.MeshStandardMaterial({map:femiTexture})
@@ -77,8 +77,8 @@ const femi = new THREE.Mesh(
 femi.position.set(0,0,9);
 scene.add(femi)
 
-const moonTexture = new THREE.TextureLoader().load('https://omens-basket.s3.eu-west-2.amazonaws.com/moon.jpg')
-const normalTexture = new THREE.TextureLoader().load('https://omens-basket.s3.eu-west-2.amazonaws.com/normal.jpg')
+const moonTexture = new THREE.TextureLoader().load('moon.jpg')
+const normalTexture = new THREE.TextureLoader().load('normal.jpg')
 const moon = new THREE.Mesh(
   new THREE.SphereGeometry(10,32,32),
   new THREE.MeshStandardMaterial({map:moonTexture,
@@ -132,8 +132,8 @@ scene.add(moon)
 //   }
 // }
 // loadingThings('./scene.gltf',2,2,2,0.01);
-const marsTexture = new THREE.TextureLoader().load('https://omens-basket.s3.eu-west-2.amazonaws.com/mars.jpg')
-const marsNormal = new THREE.TextureLoader().load('https://omens-basket.s3.eu-west-2.amazonaws.com/mars_normal.jpg')
+const marsTexture = new THREE.TextureLoader().load('mars.jpg')
+const marsNormal = new THREE.TextureLoader().load('mars_normal.jpg')
 const mars = new THREE.Mesh(
   new THREE.SphereGeometry(50,23,23),
   new THREE.MeshStandardMaterial({map:marsTexture,normalMap:marsNormal})
